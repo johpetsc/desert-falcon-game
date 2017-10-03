@@ -1,5 +1,5 @@
-#ifndef GameObject_H_INCLUDED
-#define GameObject_H_INCLUDED
+#ifndef GAMEOBJECT_H_INCLUDED
+#define GAMEOBJECT_H_INCLUDED
 
 void teste();
 

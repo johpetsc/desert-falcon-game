@@ -1,4 +1,5 @@
-#include"janela.h"
+#include "janela.h"
+#include "GameObject.h"
 
 #define SCREEN_W 640
 #define SCREEN_H 480

@@ -15,9 +15,7 @@ int ConstroiFalcon(){
 
 	Falcon=IMG_Load("falcon.png");
 	if(Falcon == NULL)
-		return 0;
-	else
-		return 1;
+	printf( "Unable to load image flacon.png ! SDL_image Error: %s\n", IMG_GetError() );
 	}
 
 void DestroiFalcon(SDL_Surface* Falcon){

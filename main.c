@@ -1,4 +1,6 @@
 #include "janela.h"
+#include "Falcon.h"
+#include "Hiero.h"
 #include "GameObject.h"
 
 #define SCREEN_W 640

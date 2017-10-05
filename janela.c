@@ -1,25 +1,31 @@
-#include<SDL/SDL.h>
+#include<SDL2/SDL.h>
 #include"janela.h"
 #include"Falcon.h"
 
 void construtor(int x, int y){
-	SDL_Surface* screen;
+	//SDL_Surface* screen;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_WM_SetCaption("Jogo", "jogo");
+	//SDL_WM_SetCaption("Jogo", "jogo");
 
-	screen = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
+	window = SDL_CreateWindow("Jogo", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, x, y, 0);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	
+	//screen = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
 
-	update(screen);
+	update(renderer);
+	destrutor(window, renderer);
 }
 
-void update(SDL_Surface* screen){
+void update(SDL_Renderer* renderer){
 	int j=0, x = 50, y = 49, altura = 1;;
 	SDL_Event event;
 
 	while(event.type != SDL_QUIT){
 		SDL_PollEvent(&event);
-		render(x, y, j, screen);
+		render(x, y, j, renderer);
 
 		switch(event.type){
             case SDL_KEYDOWN:
@@ -59,22 +65,26 @@ void update(SDL_Surface* screen){
 		}else{
 			j = 0;
 		}
-		SDL_Flip(screen);
+		SDL_Delay(5);
+		SDL_RenderPresent(renderer);
 	}
-	destrutor();
 }
 
-void render(int x, int y, int j, SDL_Surface* screen){
+void render(int x, int y, int j, SDL_Renderer* renderer){
 	SDL_Rect drect = {50, 10, 540, 350};
-	SDL_Rect drect2 = {x, y, 30, 30};
+	SDL_Rect drect2 = {x, y, 30, 20};
 	SDL_Rect drect3 = {(530-j), (10+j), 20, 10};
-	SDL_FillRect(screen, &drect, SDL_MapRGB(screen->format, 255, 180, 0));
-	SDL_FillRect(screen, &drect2, SDL_MapRGB(screen->format, 100, 51, 23));
-	SDL_FillRect(screen, &drect3, SDL_MapRGB(screen->format, 255, 255, 255));
-	ConstroiFalcon();
+	SDL_SetRenderDrawColor(renderer, 255, 180, 0, 255);
+	SDL_RenderFillRect(renderer, &drect);
+	SDL_SetRenderDrawColor(renderer, 150, 100, 0, 255);
+	SDL_RenderFillRect(renderer, &drect2);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_RenderFillRect(renderer, &drect3);
 
 }
 
-void destrutor(){
+void destrutor(SDL_Window* window, SDL_Renderer* renderer){
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 }

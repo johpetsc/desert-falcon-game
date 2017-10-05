@@ -2,7 +2,7 @@
 
 all: janela
 janela: janela.o main.o Falcon.o Hiero.c
-	gcc -o janela main.o janela.o Falcon.o Hiero.c GameObject.o -lSDL -lSDL_image
+	gcc -o janela main.o janela.o Falcon.o Hiero.c GameObject.o -lSDL_image -lSDL2
 GameObject.o: GameObject.c
 	gcc GameObject.c -o - GameObject.c -c
 Hiero.o: Hiero.c

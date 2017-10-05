@@ -1,5 +1,6 @@
 #include<SDL/SDL.h>
 #include"janela.h"
+#include"Falcon.h"
 
 void construtor(int x, int y){
 	SDL_Surface* screen;
@@ -37,8 +38,8 @@ void update(SDL_Surface* screen){
                         break;
                     case SDLK_UP:
                     	if((altura < 2) && (y > 10)){
-                        y -= 15;
-                        altura++;
+                        	y -= 15;
+                        	altura++;
                     	}
                         break;
                     case SDLK_DOWN:
@@ -63,13 +64,14 @@ void update(SDL_Surface* screen){
 	destrutor();
 }
 
-void render(int x, int y, int j){
+void render(int x, int y, int j, SDL_Surface* screen){
 	SDL_Rect drect = {50, 10, 540, 350};
 	SDL_Rect drect2 = {x, y, 30, 30};
 	SDL_Rect drect3 = {(530-j), (10+j), 20, 10};
-	SDL_FillRect(*screen, &drect, SDL_MapRGB(screen->format, 255, 180, 0));
-	SDL_FillRect(*screen, &drect2, SDL_MapRGB(screen->format, 100, 51, 23));
-	SDL_FillRect(*screen, &drect3, SDL_MapRGB(screen->format, 255, 255, 255));
+	SDL_FillRect(screen, &drect, SDL_MapRGB(screen->format, 255, 180, 0));
+	SDL_FillRect(screen, &drect2, SDL_MapRGB(screen->format, 100, 51, 23));
+	SDL_FillRect(screen, &drect3, SDL_MapRGB(screen->format, 255, 255, 255));
+	ConstroiFalcon();
 
 }
 

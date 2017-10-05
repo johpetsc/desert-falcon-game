@@ -9,9 +9,7 @@
 
 int main(int argc, char** argv){
 
-	iniciaJanela(SCREEN_W, SCREEN_H);
-	atualizaJanela();
-	fechaJanela();
+	construtor(SCREEN_W, SCREEN_H);
 
 	return 0;
 }

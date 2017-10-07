@@ -2,6 +2,7 @@
 #include"janela.h"
 #include"Falcon.h"
 #include"Hiero.h"
+#include<stdbool.h>
 
 void construtor(int x, int y){
 	SDL_Window* window;
@@ -17,7 +18,8 @@ void construtor(int x, int y){
 }
 
 void update(SDL_Renderer* renderer){
-	int j=0, x = 50, y = 49, altura = 1;;
+	int x = 50, y = 49, altura = 1,k=0;
+    int* j=&k;
 	SDL_Event event;
 
 	while(event.type != SDL_QUIT){
@@ -57,23 +59,30 @@ void update(SDL_Renderer* renderer){
         }
         
 
-		if(j<336){
-			j++;
+		if(k<336){
+			k++;
 		}else{
-			j = 0;
+			k = 0;
 		}
 		SDL_Delay(5);
 		SDL_RenderPresent(renderer);
 	}
 }
 
-void render(int x, int y, int j, SDL_Renderer* renderer){
+void render(int x, int y, int* j, SDL_Renderer* renderer){
 	SDL_Rect drect = {50, 10, 540, 370};
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderFillRect(renderer, &drect);
-	ConstroiHiero(j, renderer);
-	ConstroiFalcon(x, y, renderer);
+	
 
+    SDL_Texture* Hiero = ConstroiHiero(j, renderer);
+	
+    SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer);
+    if (ChecaColisao(Falcon, Hiero,x,y,j)== true){
+        printf("destroi\n");
+        *j=0;
+        DestroiHiero(Hiero);
+    }
 }
 
 void destrutor(SDL_Window* window, SDL_Renderer* renderer){

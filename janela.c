@@ -24,7 +24,7 @@ void update(SDL_Renderer* renderer){
 
 	while(event.type != SDL_QUIT){
 		SDL_PollEvent(&event);
-		render(x, y, j, renderer);
+		render(x, y, j,altura, renderer);
 
 		switch(event.type){
             case SDL_KEYDOWN:
@@ -69,7 +69,7 @@ void update(SDL_Renderer* renderer){
 	}
 }
 
-void render(int x, int y, int* j, SDL_Renderer* renderer){
+void render(int x, int y, int* j,int altura, SDL_Renderer* renderer){
 	SDL_Rect drect = {50, 10, 540, 370};
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderFillRect(renderer, &drect);
@@ -78,8 +78,7 @@ void render(int x, int y, int* j, SDL_Renderer* renderer){
     SDL_Texture* Hiero = ConstroiHiero(j, renderer);
 	
     SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer);
-    if (ChecaColisao(Falcon, Hiero,x,y,j)== true){
-        printf("destroi\n");
+    if ((ChecaColisao(Falcon, Hiero,x,y,j)== true) && altura==0){
         *j=0;
         DestroiHiero(Hiero);
     }

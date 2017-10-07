@@ -47,7 +47,7 @@ bool ChecaColisao(SDL_Texture* Objeto1, SDL_Texture* Objeto2,int x, int y,int* j
 	cima2 = Rect2.y;
 	direita2 = Rect2.x + Rect2.w;
 	abaixo2 = Rect2.y + Rect2.h; 
-	printf("E1=%d,C1=%d,D1=%d,A1=%d,E2=%d,C2=%d,D2=%d,A2=%d\n",esquerda1,cima1,direita1,abaixo1,esquerda2,cima2,direita2,abaixo2);
+	
 	if( abaixo1 < cima2 ) 
 		return false; 
 	else if( cima1 > abaixo2 ) 

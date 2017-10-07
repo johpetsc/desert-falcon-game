@@ -34,7 +34,7 @@ void update(SDL_Renderer* renderer){
                         }
                         break;
                     case SDLK_RIGHT:
-                    	if((x < 630) && (y < 309)){
+                    	if((x < 630) && (y < 316)){
                         	x += 2;
                         	y += 2;
                         }
@@ -46,7 +46,7 @@ void update(SDL_Renderer* renderer){
                     	}
                         break;
                     case SDLK_DOWN:
-                    	if((altura > 0) && (y < 330)){
+                    	if((altura > 0) && (y < 316)){
                         	y += 15;
                         	altura--;
                         }
@@ -68,7 +68,7 @@ void update(SDL_Renderer* renderer){
 }
 
 void render(int x, int y, int j, SDL_Renderer* renderer){
-	SDL_Rect drect = {50, 10, 540, 350};
+	SDL_Rect drect = {50, 10, 540, 370};
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderFillRect(renderer, &drect);
 	ConstroiHiero(j, renderer);

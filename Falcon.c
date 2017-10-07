@@ -3,7 +3,7 @@
 #include <SDL2/SDL_image.h>
 
 void ConstroiFalcon(int x, int y, SDL_Renderer* renderer){
-	SDL_Rect Fal = {x, y, 32, 32};
+	SDL_Rect Fal = {x, y, 64, 64};
 	IMG_Init(IMG_INIT_PNG);
 	SDL_Surface* Falcon = IMG_Load("falcon.png"); // Inicia Falcon como NULL pois este é um ponteiro.
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Falcon);

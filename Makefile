@@ -1,10 +1,8 @@
 #Makefile#
 
 all: janela
-janela: janela.o main.o GameObject.o Falcon.o Hiero.c
-	gcc -o janela main.o janela.o Falcon.o Hiero.c GameObject.o -lSDL2_image -lSDL2
-GameObject.o: GameObject.c
-	gcc GameObject.c -o GameObject.o -c
+janela: janela.o main.o Falcon.o Hiero.c
+	gcc -o janela main.o janela.o Falcon.o Hiero.c -lSDL2_image -lSDL2
 Hiero.o: Hiero.c
 	gcc Hiero.c -o Hiero.o -c
 Falcon.o: Falcon.c

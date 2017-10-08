@@ -84,7 +84,8 @@ void render(int x, int y, int* j, int* l, int altura, SDL_Renderer* renderer){
 	
     SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer);
     if ((ChecaColisao(Falcon, Hiero, x, y, j,l)== true) && altura==0){
-        *j=0;
+		*j=0;
+		*l = (rand() % 640) + 360;
         DestroiHiero(Hiero);
     }
 }

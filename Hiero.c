@@ -4,7 +4,7 @@
 
 SDL_Texture* ConstroiHiero(int* j,int* l, SDL_Renderer* renderer){
 	int k=*j,m=*l;
-	SDL_Rect Hie = {(m), (10+k), 32, 32};
+	SDL_Rect Hie = {(m), (k), 32, 32};
 	IMG_Init(IMG_INIT_PNG);
 	SDL_Surface* Hiero = IMG_Load("hiero.png"); 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Hiero);

@@ -26,7 +26,7 @@ void update(SDL_Renderer* renderer){
 	while(event.type != SDL_QUIT){
 		SDL_PollEvent(&event);
         if (flag == 0){
-            m = (rand() % 680) + 400;
+            m = (rand() % 640) + 360;
         }
 		render(x, y, j, l, altura, renderer);
         flag = 1;
@@ -83,7 +83,7 @@ void render(int x, int y, int* j, int* l, int altura, SDL_Renderer* renderer){
     SDL_Texture* Hiero = ConstroiHiero(j,l, renderer);
 	
     SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer);
-    if ((ChecaColisao(Falcon, Hiero, x, y, j)== true) && altura==0){
+    if ((ChecaColisao(Falcon, Hiero, x, y, j,l)== true) && altura==0){
         *j=0;
         DestroiHiero(Hiero);
     }

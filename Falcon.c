@@ -22,7 +22,7 @@ void DestroiFalcon(SDL_Texture* Falcon){
 	printf("destroi/n");
 }
 
-bool ChecaColisao(SDL_Texture* Objeto1, SDL_Texture* Objeto2,int x, int y,int* j){
+bool ChecaColisao(SDL_Texture* Objeto1, SDL_Texture* Objeto2,int x, int y,int* j,int * k){
 	int esquerda1, esquerda2, direita1, direita2, cima1, cima2, abaixo1, abaixo2;
 	int largura1, largura2, altura1, altura2;
 	SDL_QueryTexture(Objeto1, NULL, NULL, &largura1, &altura1);
@@ -34,14 +34,14 @@ bool ChecaColisao(SDL_Texture* Objeto1, SDL_Texture* Objeto2,int x, int y,int* j
     Rect1.y = y;
     Rect1.w = largura1;
     Rect1.h = altura1;
-    Rect2.x = (530-(*j));
-    Rect2.y = (10+(*j));
+    Rect2.x = *k;
+    Rect2.y = *j;
     Rect2.w = largura2;
     Rect2.h = altura2;
 
     esquerda1 = Rect1.x;
     cima1 = Rect1.y;
-	direita1 = Rect1.x + Rect1.w;
+	direita1 = Rect1.x + Rect1.w+30;
 	abaixo1 = Rect1.y + Rect1.h; 
 	esquerda2 = Rect2.x;
 	cima2 = Rect2.y;

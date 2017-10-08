@@ -18,29 +18,29 @@ void construtor(int x, int y){
 }
 
 void update(SDL_Renderer* renderer){
-	int x = 50, y = 49, altura = 1,k=0,m=0, flag=0;
-    int* j=&k;
-    int* l=&m;
+	int x = 50, y = 49, altura = 1, k = 0, m = 0, flag = 0;
+    int* j = &k;
+    int* l = &m;
 	SDL_Event event;
 
 	while(event.type != SDL_QUIT){
 		SDL_PollEvent(&event);
-        if (flag==0){
-            m = (rand() % 600) + 400;
+        if (flag == 0){
+            m = (rand() % 680) + 400;
         }
 		render(x, y, j, l, altura, renderer);
-        flag=1;
+        flag = 1;
 		switch(event.type){
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym){
                     case SDLK_LEFT:
-                    	if((x > 50) && (y > 30)){
+                    	if((x > 0) && (y > 0)){
                         	x -= 2;
                         	y -= 2;
                         }
                         break;
                     case SDLK_RIGHT:
-                    	if((x < 630) && (y < 316)){
+                    	if((x < 630) && (y < 320)){
                         	x += 2;
                         	y += 2;
                         }
@@ -63,10 +63,10 @@ void update(SDL_Renderer* renderer){
         }
         
 
-		if(k>450 && m<550){
-			k++,m--;
+		if((k < 342) && (m < 550)){
+			k++, m--;
 		}else{
-			k = 0,m=0,flag=0;
+			k = 0,m = 0,flag = 0;
 		}
 
 		SDL_Delay(5);
@@ -75,7 +75,7 @@ void update(SDL_Renderer* renderer){
 }
 
 void render(int x, int y, int* j, int* l, int altura, SDL_Renderer* renderer){
-	SDL_Rect drect = {50, 10, 540, 370};
+	SDL_Rect drect = {0, 0, 680, 380};
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderFillRect(renderer, &drect);
 	
@@ -83,7 +83,7 @@ void render(int x, int y, int* j, int* l, int altura, SDL_Renderer* renderer){
     SDL_Texture* Hiero = ConstroiHiero(j,l, renderer);
 	
     SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer);
-    if ((ChecaColisao(Falcon, Hiero,x,y,j)== true) && altura==0){
+    if ((ChecaColisao(Falcon, Hiero, x, y, j)== true) && altura==0){
         *j=0;
         DestroiHiero(Hiero);
     }

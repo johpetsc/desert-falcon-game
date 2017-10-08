@@ -18,7 +18,7 @@ void construtor(int x, int y){
 }
 
 void update(SDL_Renderer* renderer){
-	int x = 50, y = 49, altura = 1, k = 0, m = 0, flag = 0;
+	int x = 50, y = 49, y1 = 49, altura = 1, k = 0, m = 0, flag = 0;
     int* j = &k;
     int* l = &m;
 	SDL_Event event;
@@ -28,7 +28,7 @@ void update(SDL_Renderer* renderer){
         if (flag == 0){
             m = (rand() % 640) + 360;
         }
-		render(x, y, j, l, altura, renderer);
+		render(x, y, y1, j, l, altura, renderer);
         flag = 1;
 		switch(event.type){
             case SDL_KEYDOWN:
@@ -36,13 +36,15 @@ void update(SDL_Renderer* renderer){
                     case SDLK_LEFT:
                     	if((x > 0) && (y > 0)){
                         	x -= 2;
-                        	y -= 2;
+							y -= 2;
+							y1 -= 2;
                         }
                         break;
                     case SDLK_RIGHT:
                     	if((x < 630) && (y < 320)){
                         	x += 2;
-                        	y += 2;
+							y += 2;
+							y1 += 2;
                         }
                         break;
                     case SDLK_UP:
@@ -63,7 +65,7 @@ void update(SDL_Renderer* renderer){
         }
         
 
-		if((k < 342) && (m < 550)){
+		if((k < 350) && (m < 550)){
 			k++, m--;
 		}else{
 			k = 0,m = 0,flag = 0;
@@ -74,10 +76,13 @@ void update(SDL_Renderer* renderer){
 	}
 }
 
-void render(int x, int y, int* j, int* l, int altura, SDL_Renderer* renderer){
+void render(int x, int y, int y1, int* j, int* l, int altura, SDL_Renderer* renderer){
 	SDL_Rect drect = {0, 0, 680, 380};
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderFillRect(renderer, &drect);
+	SDL_Rect sombra = {x+20, y1+48, 20, 15};
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderFillRect(renderer, &sombra);
 	
 
     SDL_Texture* Hiero = ConstroiHiero(j,l, renderer);

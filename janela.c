@@ -18,14 +18,18 @@ void construtor(int x, int y){
 }
 
 void update(SDL_Renderer* renderer){
-	int x = 50, y = 49, altura = 1,k=0;
+	int x = 50, y = 49, altura = 1,k=0,m=0, flag=0;
     int* j=&k;
+    int* l=&m;
 	SDL_Event event;
 
 	while(event.type != SDL_QUIT){
 		SDL_PollEvent(&event);
-		render(x, y, j,altura, renderer);
-
+        if (flag==0){
+            m = (rand() % 600) + 400;
+        }
+		render(x, y, j, l, altura, renderer);
+        flag=1;
 		switch(event.type){
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym){
@@ -59,23 +63,24 @@ void update(SDL_Renderer* renderer){
         }
         
 
-		if(k<336){
-			k++;
+		if(k>450 && m<550){
+			k++,m--;
 		}else{
-			k = 0;
+			k = 0,m=0,flag=0;
 		}
+
 		SDL_Delay(5);
 		SDL_RenderPresent(renderer);
 	}
 }
 
-void render(int x, int y, int* j,int altura, SDL_Renderer* renderer){
+void render(int x, int y, int* j, int* l, int altura, SDL_Renderer* renderer){
 	SDL_Rect drect = {50, 10, 540, 370};
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderFillRect(renderer, &drect);
 	
 
-    SDL_Texture* Hiero = ConstroiHiero(j, renderer);
+    SDL_Texture* Hiero = ConstroiHiero(j,l, renderer);
 	
     SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer);
     if ((ChecaColisao(Falcon, Hiero,x,y,j)== true) && altura==0){

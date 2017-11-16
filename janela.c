@@ -2,7 +2,8 @@
 #include"janela.h"
 #include"Falcon.h"
 #include"Hiero.h"
-#include"Obstaculos.h"
+#include"Obstaculo.h"
+#include"Inimigo.h"
 #include<stdbool.h>
 
 void construtor(int x, int y){
@@ -19,11 +20,13 @@ void construtor(int x, int y){
 }
 
 void update(SDL_Renderer* renderer){
-	int x = 50, y = 49, y1 = 49, altura = 1, k = 0, m = 0, k1 = 0, m1 = 0, flag = 0, flag1 = 0;
+	int x = 50, y = 49, y1 = 49, altura = 1, k = -10, m = 0, k1 = -20, m1 = 0, k2 = -20, m2 = 0, flag = 0, flag1 = 0, flag2 = 0;
 	int* j = &k;
 	int* j1 = &k1;
+	int* j2 = &k2;
 	int* l = &m;
 	int* l1 = &m1;
+	int* l2 = &m2;
 	SDL_Event event;
 
 	while(event.type != SDL_QUIT){
@@ -31,13 +34,18 @@ void update(SDL_Renderer* renderer){
         if (flag == 0){
 			m = (rand() % 640) + 360;
 		}
-		if (flag1 ==  0){
-			m1 = (rand() % 640) + 360;
+		if (flag1 == 0){
+			m1 = (rand() % 640) + 60;
+		}
+		if (flag2 ==  0){
+			m2 = (rand() % 640) + 160;
 		}
 
-		render(x, y, y1, j, l, j1, l1, altura, renderer);
+		render(x, y, y1, j, l, j1, l1, j2, l2, altura, renderer);
+		SDL_Delay(5);
 		flag = 1;
 		flag1 = 1;
+		flag2 = 1;
 		switch(event.type){
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym){
@@ -71,17 +79,23 @@ void update(SDL_Renderer* renderer){
                         break;
             }
         }
-        
+		if((k2 < 325) && (m2 < 550)){
+			k2 = k2 + 2; 
+			m2 = m2 - 2;
+		}else{
+			k2 = -20, m2 = 0,flag2 = 0;
+		}
+		
 		if((k1 < 325) && (m1 < 550)){
 			k1++, m1--;
 		}else{
-			k1 = 0,m1 = 0,flag1 = 0;
+			k1 = -20, m1 = 0,flag1 = 0;
 		}
 
 		if((k < 350) && (m < 550)){
 			k++, m--;
 		}else{
-			k = 0,m = 0,flag = 0;
+			k = -20, m = 0,flag = 0;
 		}
 
 		SDL_Delay(5);
@@ -89,20 +103,19 @@ void update(SDL_Renderer* renderer){
 	}
 }
 
-void render(int x, int y, int y1, int* j, int* l, int* j1, int* l1, int altura, SDL_Renderer* renderer){
+void render(int x, int y, int y1, int* j, int* l, int* j1, int* l1 ,int* j2, int* l2, int altura, SDL_Renderer* renderer){
 	SDL_Rect drect = {0, 0, 680, 380};
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 140, 255);
 	SDL_RenderFillRect(renderer, &drect);
-	SDL_Rect sombra = {x+20, y1+48, 20, 15};
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderFillRect(renderer, &sombra);
 	
 
 	SDL_Texture* Hiero = ConstroiHiero(j,l, renderer);
 	
-	SDL_Texture* Obstaculos = ConstroiObstaculos(j1, l1, renderer);
+	SDL_Texture* Obstaculo = ConstroiObstaculo(j1, l1, renderer);
 
-    SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer);
+	SDL_Texture* Inimigo = ConstroiInimigo(j2, l2, renderer);
+
+    SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer, altura);
     if ((ChecaColisao(Falcon, Hiero, x, y, j,l)== true) && altura==0){
 		*j=0;
 		*l = (rand() % 640) + 360;

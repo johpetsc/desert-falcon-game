@@ -4,9 +4,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-SDL_Texture* ConstroiFalcon(int x, int y, SDL_Renderer* renderer, int alt){
+SDL_Texture* ConstroiFalcon(int x, int y, SDL_Renderer* renderer, int altura){
 	SDL_Rect Fal = {x, y, 64, 64};
-	SDL_Rect Som = {x, (y+10+(alt*15)), 64, 64};
+	SDL_Rect Som = {x, (y+10+(altura*15)), 64, 64};
 	IMG_Init(IMG_INIT_PNG);
 	SDL_Surface* Falcon = IMG_Load("falcon.png"); 
 	SDL_Surface* Sombra = IMG_Load("sombra.png");
@@ -15,10 +15,8 @@ SDL_Texture* ConstroiFalcon(int x, int y, SDL_Renderer* renderer, int alt){
 	SDL_RenderCopy(renderer, texture2, NULL, &Som);
 	SDL_RenderCopy(renderer, texture, NULL, &Fal);
 
-	if(Falcon == NULL)
-	printf( "Unable to load image flacon.png ! SDL_image Error: %s\n", IMG_GetError() );
 	return texture;
-	}
+}
 
 
 void DestroiFalcon(SDL_Texture* Falcon){

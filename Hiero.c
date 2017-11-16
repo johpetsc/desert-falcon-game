@@ -10,10 +10,9 @@ SDL_Texture* ConstroiHiero(int* j,int* l, SDL_Renderer* renderer){
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Hiero);
 	SDL_RenderCopy(renderer, texture, NULL, &Hie);
 
-	if(Hiero == NULL)
-	printf( "Unable to load image flacon.png ! SDL_image Error: %s\n", IMG_GetError() );
+	
 	return texture;
-	}
+}
 
 void DestroiHiero(SDL_Texture* Hiero){
 	SDL_DestroyTexture(Hiero);

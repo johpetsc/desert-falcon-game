@@ -10,6 +10,8 @@ SDL_Texture* ConstroiInimigo(int* j, int* l, SDL_Renderer* renderer){
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Inimigo);
     SDL_RenderCopy(renderer, texture, NULL, &Ini);
 
+    return texture;
+
 }
 void DestroiInimigo(SDL_Texture* Inimigo){
 	SDL_DestroyTexture(Inimigo);

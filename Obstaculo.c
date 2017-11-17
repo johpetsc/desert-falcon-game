@@ -1,6 +1,6 @@
 #include "Obstaculo.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include "SDL.h"
+#include "SDL_image.h"
 
 SDL_Texture* ConstroiObstaculo(int* j, int* l, SDL_Renderer* renderer){
 	int k=*j,m=*l;

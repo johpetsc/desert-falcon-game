@@ -1,7 +1,7 @@
 #include "Escrita.h"
 #include "janela.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL.h"
+#include "SDL_ttf.h"
 #include <string.h>
 
 void InsereNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){

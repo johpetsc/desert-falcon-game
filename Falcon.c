@@ -21,7 +21,6 @@ SDL_Texture* ConstroiFalcon(int x, int y, SDL_Renderer* renderer, int altura){
 
 void DestroiFalcon(SDL_Texture* Falcon){
 	SDL_DestroyTexture(Falcon);
-	printf("destroi/n");
 }
 
 bool ChecaColisao(SDL_Texture* Objeto1, SDL_Texture* Objeto2,int x, int y,int* j,int * k){

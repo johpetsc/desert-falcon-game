@@ -8,7 +8,7 @@
 
 int main(int argc, char** argv){
 
-	construtor(SCREEN_W, SCREEN_H);
+	construtor(SCREEN_W, SCREEN_H,1);
 
 	return 0;
 }

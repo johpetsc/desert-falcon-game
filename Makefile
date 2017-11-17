@@ -2,7 +2,7 @@
 
 all: janela
 janela: janela.o main.o Falcon.o Hiero.o Obstaculo.o Inimigo.o
-	gcc -o janela main.o janela.o Falcon.o Hiero.o Obstaculo.o Inimigo.o -lSDL2_image -lSDL2
+	gcc -o janela main.o janela.o Falcon.o Hiero.o Obstaculo.o Inimigo.o -lSDL2_image -lSDL2_ttf -lSDL2
 Hiero.o: Hiero.c
 	gcc Hiero.c -o Hiero.o -c
 Falcon.o: Falcon.c

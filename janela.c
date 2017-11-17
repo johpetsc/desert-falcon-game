@@ -25,9 +25,9 @@ void construtor(int x, int y,int estado){
 	IMG_Init(IMG_INIT_PNG);/** Inicia a apresentação de imagens PNG da biblioteca SDL_image.*/
 	SDL_Init(SDL_INIT_EVERYTHING);/** Inicida as funções da bibloteca SDL responsável pela janela do jogo.*/
 	TTF_Init();/** Inicia a apresentação de texto da biblioteca SDL_ttf.*/
-	SDL_Surface* jogar = IMG_Load("jogar.png");/** Carrega uma imagen na janela do jogo.*/
-	SDL_Surface* placar = IMG_Load("placar.png");/** Carrega uma imagen na janela do jogo.*/
-	SDL_Surface* sair = IMG_Load("sair.png");/** Carrega uma imagen na janela do jogo.*/
+	SDL_Surface* jogar = IMG_Load("Imagens/jogar.png");/** Carrega uma imagen na janela do jogo.*/
+	SDL_Surface* placar = IMG_Load("Imagens/placar.png");/** Carrega uma imagen na janela do jogo.*/
+	SDL_Surface* sair = IMG_Load("Imagens/sair.png");/** Carrega uma imagen na janela do jogo.*/
 	SDL_Rect rectJogar = {200, 80,jogar->w,jogar->h};/** Responsável pelo tamanho e posição de uma imagen na janela do jogo.*/
 	SDL_Rect rectPlacar = {200, 200,placar->w,placar->h};/** Responsável pelo tamanho e posição de uma imagen na janela do jogo.*/
 	SDL_Rect rectSair = {200, 310,sair->w,sair->h};/** Responsável pelo tamanho e posição de uma imagen na janela do jogo.*/
@@ -206,6 +206,7 @@ int update(SDL_Window* window,SDL_Renderer* renderer){
 
 int render(int alt, int x, int y, int y1, int* j, int* l, int* j1, int* l1 ,int* j2, int* l2, int altura, SDL_Renderer* renderer){
 /** Função para renderizar todos os componentes do jogo.*/
+
 	int ponto = 0;
 	SDL_Rect drect = {0, 0, 640, 380};
 	SDL_SetRenderDrawColor(renderer, 255, 255, 140, 255);

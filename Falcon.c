@@ -10,8 +10,8 @@ SDL_Texture* ConstroiFalcon(int x, int y, SDL_Renderer* renderer, int altura){
 	SDL_Rect Fal = {x, y, 64, 64};
 	SDL_Rect Som = {x, (y+10+(altura*15)), 64, 64};/** Posição da sombra do falcon.*/
 	IMG_Init(IMG_INIT_PNG);
-	SDL_Surface* Falcon = IMG_Load("falcon.png"); /** Carrega a imagem do falcon.*/
-	SDL_Surface* Sombra = IMG_Load("sombra.png"); /** Carrega a imagem da sombra do falcon.*/
+	SDL_Surface* Falcon = IMG_Load("Imagens/falcon.png"); /** Carrega a imagem do falcon.*/
+	SDL_Surface* Sombra = IMG_Load("Imagens/sombra.png"); /** Carrega a imagem da sombra do falcon.*/
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Falcon); /** Cria a textura do falcon.*/
 	SDL_Texture* texture2 = SDL_CreateTextureFromSurface(renderer, Sombra); /** Cria a textura da sombra do falcon.*/
 	SDL_RenderCopy(renderer, texture2, NULL, &Som); /** Renderiza o falcon.*/

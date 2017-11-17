@@ -1,12 +1,14 @@
 #Makefile#
 
 all: janela
-janela: janela.o main.o Falcon.o Hiero.o Obstaculo.o Inimigo.o
-	gcc -o janela main.o janela.o Falcon.o Hiero.o Obstaculo.o Inimigo.o -lSDL2_image -lSDL2_ttf -lSDL2
+janela: janela.o main.o Falcon.o Hiero.o Obstaculo.o Inimigo.o Escrita.o
+	gcc -o janela main.o janela.o Falcon.o Hiero.o Obstaculo.o Inimigo.o Escrita.o -lSDL2_image -lSDL2_ttf -lSDL2
 Hiero.o: Hiero.c
 	gcc Hiero.c -o Hiero.o -c
 Falcon.o: Falcon.c
 	gcc Falcon.c -o Falcon.o -c
+Escrita.o: Escrita.c
+	gcc Escrita.c -o Escrita.o -c
 Obstaculo.o: Obstaculo.c
 	gcc Obstaculo.c -o Obstaculo.o -c
 Inimigo.o: Inimigo.c

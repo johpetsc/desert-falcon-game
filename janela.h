@@ -3,7 +3,7 @@
 
 void construtor(int x, int y,int estado);
 int render();
-void update();
+int update();
 void destrutor();
 
 #endif

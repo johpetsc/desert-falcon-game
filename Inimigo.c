@@ -9,7 +9,6 @@ SDL_Texture* ConstroiInimigo(int* j, int* l, SDL_Renderer* renderer){
 	SDL_Surface* Inimigo = IMG_Load("inimigo.png"); 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Inimigo);
     SDL_RenderCopy(renderer, texture, NULL, &Ini);
-
     return texture;
 
 }

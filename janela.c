@@ -6,11 +6,13 @@
 #include"Hiero.h"
 #include"Obstaculo.h"
 #include"Inimigo.h"
+#include"Escrita.h"
 #include<stdbool.h>
-#include <string.h>
+
 
 void construtor(int x, int y,int estado){
-	int z,w,running=1;
+	int z,w,ponto=0;
+	
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Rect drect = {0, 0, 640, 480};
@@ -64,7 +66,9 @@ void construtor(int x, int y,int estado){
 								SDL_DestroyTexture(textSair);
 								SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 								SDL_RenderClear(renderer);
-								update(window,renderer);
+								ponto=update(window,renderer);
+								InsereNome(ponto,window,renderer);
+
 							}
 							if(z>225 && z<(370)&& w > 325 && w < (410)){
 								SDL_DestroyTexture(textJogar);
@@ -88,9 +92,9 @@ void construtor(int x, int y,int estado){
 	destrutor(window, renderer);
 }
 
-void update(SDL_Window* window,SDL_Renderer* renderer){
-	int x = 50, y = 49, y1 = 49, altura = 1, k = -10, m = 0, k1 = -20, m1 = 0, k2 = -20, m2 = 0, flag = 0, flag1 = 0, flag2 = 0;
-	int score=0;
+int update(SDL_Window* window,SDL_Renderer* renderer){
+	int alt=0 ,x = 50, y = 49, y1 = 49, altura = 1, k = -10, m = 0, k1 = -20, m1 = 0, k2 = -20, m2 = 0, flag = 0, flag1 = 0, flag2 = 0,flag3 =0;
+	int score=0,temp,running=1;
 	char pontos[12];
 	char aux[8];
 	int* j = &k;
@@ -104,9 +108,9 @@ void update(SDL_Window* window,SDL_Renderer* renderer){
 	SDL_Texture* textScore;
 	SDL_Rect posScore = {40,430 , 0, 0};
 	SDL_Event event;
-	TTF_Font* sans = TTF_OpenFont("/home/matheus/Documents/TP2/Sans.ttf", 24);
+	TTF_Font* sans = TTF_OpenFont("Sans.ttf", 24);
 	
-	while(event.type != SDL_QUIT){
+	while(event.type!=SDL_QUIT){
 		SDL_PollEvent(&event);
         if (flag == 0){
 			m = (rand() % 640) + 360;
@@ -117,11 +121,19 @@ void update(SDL_Window* window,SDL_Renderer* renderer){
 		if (flag2 ==  0){
 			m2 = (rand() % 640) + 160;
 		}
+		if (flag3 == 0){
+			alt = (rand() % 3);
+		}
+		temp = render(alt, x, y, y1, j, l, j1, l1, j2, l2, altura, renderer);
+		if (temp==10){
+			SDL_FreeSurface(surfScore);
+			SDL_DestroyTexture(textScore);
+			return score;
 
-		score  = score + render(x, y, y1, j, l, j1, l1, j2, l2, altura, renderer);
+		}
+		score  = score + temp;
 		if(sans == NULL){
 			printf("Fonte não carregada\n");
-			printf("Well darn, \n%s",TTF_GetError());
 		}
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderFillRect(renderer,&posScore);
@@ -140,6 +152,7 @@ void update(SDL_Window* window,SDL_Renderer* renderer){
 		flag = 1;
 		flag1 = 1;
 		flag2 = 1;
+		flag3 = 1;
 		switch(event.type){
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym){
@@ -198,7 +211,7 @@ void update(SDL_Window* window,SDL_Renderer* renderer){
 	destrutor(window, renderer);
 }
 
-int render(int x, int y, int y1, int* j, int* l, int* j1, int* l1 ,int* j2, int* l2, int altura, SDL_Renderer* renderer){
+int render(int alt, int x, int y, int y1, int* j, int* l, int* j1, int* l1 ,int* j2, int* l2, int altura, SDL_Renderer* renderer){
 	int ponto=0;
 	SDL_Rect drect = {0, 0, 640, 380};
 	SDL_SetRenderDrawColor(renderer, 255, 255, 140, 255);
@@ -210,7 +223,7 @@ int render(int x, int y, int y1, int* j, int* l, int* j1, int* l1 ,int* j2, int*
 	
 	SDL_Texture* Obstaculo = ConstroiObstaculo(j1, l1, renderer);
 
-	SDL_Texture* Inimigo = ConstroiInimigo(j2, l2, renderer);
+	SDL_Texture* Inimigo = ConstroiInimigo( j2, l2, renderer);
 
     SDL_Texture* Falcon = ConstroiFalcon(x, y, renderer, altura);
 	
@@ -221,6 +234,19 @@ int render(int x, int y, int y1, int* j, int* l, int* j1, int* l1 ,int* j2, int*
 		ponto += 1;
         DestroiHiero(Hiero);
     }
+	else if((ChecaColisao(Falcon, Obstaculo, x, y, j1,l1)== true) && altura==0){
+		DestroiObstaculo(Obstaculo); 
+		DestroiFalcon(Falcon);
+		return 10;
+
+	}
+	else if((ChecaColisao(Falcon, Inimigo, x, y, j2,l2)== true) && altura==alt){
+		DestroiObstaculo(Inimigo); 
+		DestroiFalcon(Falcon);
+		
+		return 10;
+
+	}
 	return ponto;
 }
 

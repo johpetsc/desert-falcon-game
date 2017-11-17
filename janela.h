@@ -1,3 +1,5 @@
+/**Arquivo header do módulo janela.*/
+
 #ifndef JANELA_H_INCLUDED
 #define JANELA_H_INCLUDED
 

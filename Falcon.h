@@ -1,3 +1,5 @@
+/* Arquivo header do módulo falcon.*/
+
 #ifndef FALCON_H_INCLUDED
 #define FALCOM_H_INCLUDED
 

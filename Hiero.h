@@ -1,3 +1,5 @@
+/** Arquivo header do módulo Hiero.*/
+
 #ifndef HIERO_H_INCLUDED
 #define HIERO_H_INCLUDED
 

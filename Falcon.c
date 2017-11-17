@@ -5,25 +5,31 @@
 #include <stdio.h>
 
 SDL_Texture* ConstroiFalcon(int x, int y, SDL_Renderer* renderer, int altura){
+/** Função para construção do componente falcon.*/
+
 	SDL_Rect Fal = {x, y, 64, 64};
-	SDL_Rect Som = {x, (y+10+(altura*15)), 64, 64};
+	SDL_Rect Som = {x, (y+10+(altura*15)), 64, 64};/** Posição da sombra do falcon.*/
 	IMG_Init(IMG_INIT_PNG);
-	SDL_Surface* Falcon = IMG_Load("falcon.png"); 
-	SDL_Surface* Sombra = IMG_Load("sombra.png");
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Falcon);
-	SDL_Texture* texture2 = SDL_CreateTextureFromSurface(renderer, Sombra);
-	SDL_RenderCopy(renderer, texture2, NULL, &Som);
-	SDL_RenderCopy(renderer, texture, NULL, &Fal);
+	SDL_Surface* Falcon = IMG_Load("falcon.png"); /** Carrega a imagem do falcon.*/
+	SDL_Surface* Sombra = IMG_Load("sombra.png"); /** Carrega a imagem da sombra do falcon.*/
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, Falcon); /** Cria a textura do falcon.*/
+	SDL_Texture* texture2 = SDL_CreateTextureFromSurface(renderer, Sombra); /** Cria a textura da sombra do falcon.*/
+	SDL_RenderCopy(renderer, texture2, NULL, &Som); /** Renderiza o falcon.*/
+	SDL_RenderCopy(renderer, texture, NULL, &Fal); /** Renderiza a sombra do falcon.*/
 
 	return texture;
 }
 
 
 void DestroiFalcon(SDL_Texture* Falcon){
+/** Função para destruir o componente falcon.*/
+
 	SDL_DestroyTexture(Falcon);
 }
 
 bool ChecaColisao(SDL_Texture* Objeto1, SDL_Texture* Objeto2,int x, int y,int* j,int * k){
+/** Função para checar se há colisão entre o falcon e outros componentes do jogo.*/
+
 	int esquerda1, esquerda2, direita1, direita2, cima1, cima2, abaixo1, abaixo2;
 	int largura1, largura2, altura1, altura2;
 	SDL_QueryTexture(Objeto1, NULL, NULL, &largura1, &altura1);

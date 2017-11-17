@@ -1,3 +1,5 @@
+/** Arquivo header do módulo Obstaculo.*/
+
 #ifndef OBSTACULO_H_INCLUDED
 #define OBSTACULO_H_INCLUDED
 

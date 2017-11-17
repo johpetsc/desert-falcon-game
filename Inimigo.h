@@ -1,3 +1,5 @@
+/** Arquivo header do módulo Inimigo.*/
+
 #ifndef INIMIGO_H_INCLUDED
 #define INIMIGO_H_INCLUDED
 

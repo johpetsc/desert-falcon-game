@@ -3,7 +3,7 @@
 
 #include "SDL.h"
 
-    void PegaNome(int ponto,SDL_Window* window,SDL_Renderer* renderer);
+    int PegaNome(int ponto,SDL_Window* window,SDL_Renderer* renderer);
     void InsereNome();
 
 #endif

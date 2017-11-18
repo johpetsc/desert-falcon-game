@@ -4,7 +4,7 @@
 #include "SDL_ttf.h"
 #include <string.h>
 
-void PegaNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){
+int PegaNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){
     int tamanho,i;
     SDL_Rect box ;
     char nome[10]="NOME : ";
@@ -42,6 +42,7 @@ void PegaNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){
             }
             else if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_RETURN && (strlen(nome) > 7)){
                 InsereNome(ponto,nome);
+                return 0;
             }
 
         }

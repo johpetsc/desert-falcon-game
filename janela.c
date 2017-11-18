@@ -69,7 +69,12 @@ void construtor(int x, int y,int estado){
 					SDL_RenderClear(renderer);
 					ponto = update(window,renderer);/** Começa o jogo e retorna a pontuação depois que o jogo for terminado.*/
 					PegaNome(ponto,window,renderer);
-					
+					SDL_SetRenderDrawColor(renderer, 192, 159, 45, 255);/** Define a cor para renderizar*/
+					SDL_RenderClear(renderer);
+					SDL_RenderCopy(renderer, textJogar, NULL, &rectJogar);/** Renderiza a textura.*/
+					SDL_RenderCopy(renderer, textPlacar, NULL, &rectPlacar);/** Renderiza a textura.*/
+					SDL_RenderCopy(renderer, textSair, NULL, &rectSair);/** Renderiza a textura.*/
+					SDL_RenderPresent(renderer);
 				}
 				if((z > 225) && (z < 370) && (w > 325) && (w < 410)){/** Condição para quando o jogador clicar em sair.*/
 					SDL_DestroyTexture(textJogar);

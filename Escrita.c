@@ -4,7 +4,7 @@
 #include "SDL_ttf.h"
 #include <string.h>
 
-void InsereNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){
+void PegaNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){
     int tamanho,i;
     SDL_Rect box ;
     char nome[10]="NOME : ";
@@ -31,20 +31,20 @@ void InsereNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){
         else if(ev.type == SDL_TEXTINPUT || ev.type == SDL_KEYDOWN){
             if(ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_BACKSPACE && (strlen(nome) > 7)){
                 
-                nome[tamanho-1] = 0;
+                nome[tamanho-1] = '\0';
                 tamanho = tamanho - 1;
                
             }
             else if(ev.type == SDL_TEXTINPUT && tamanho < 10){
-                printf("1\n");
+                
                 strcat(nome, ev.text.text);
                 tamanho = tamanho + 1;
             }
             else if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_RETURN && (strlen(nome) > 7)){
-                
+                InsereNome(ponto,nome);
             }
 
-        }printf("%d\n",tamanho);
+        }
         box.x = 220;
         box.y = 220;
 		box.w = surfScore->w;
@@ -56,4 +56,31 @@ void InsereNome(int ponto,SDL_Window* window,SDL_Renderer* renderer){
 		SDL_RenderPresent(renderer);
 		SDL_DestroyTexture(textScore);
     }  
+}
+
+void InsereNome(int pontos, char* nome){
+    char aux[7] = "";
+    int i = 0;
+
+    
+    sprintf(aux,"%d",pontos);
+    
+    
+    for(i = 1; i < 4;i++){
+        aux[i] = nome[i+6];
+        }
+    
+    
+        
+    
+    FILE *fp = fopen ("Placar.txt", "r+");
+
+    
+    fseek(fp,0,SEEK_END) ;
+    fputs(aux,fp);
+    fputs("\n",fp); 
+    
+    fclose(fp);
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"SCORE",
+								"Você foi colocado no rank de pontuação.",NULL);
 }

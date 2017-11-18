@@ -42,7 +42,6 @@ void construtor(int x, int y,int estado){
 	textJogar = SDL_CreateTextureFromSurface(renderer, jogar);/** Cria uma textura a partir de uma imagem.*/
 	textPlacar = SDL_CreateTextureFromSurface(renderer, placar);/** Cria uma textura a partir de uma imagem.*/
 	textSair = SDL_CreateTextureFromSurface(renderer, sair);/** Cria uma textura a partir de uma imagem.*/
-				
 	SDL_RenderCopy(renderer, textJogar, NULL, &rectJogar);/** Renderiza a textura.*/
 	SDL_RenderCopy(renderer, textPlacar, NULL, &rectPlacar);/** Renderiza a textura.*/
 	SDL_RenderCopy(renderer, textSair, NULL, &rectSair);/** Renderiza a textura.*/
@@ -50,9 +49,11 @@ void construtor(int x, int y,int estado){
 	SDL_FreeSurface(jogar);
 	SDL_FreeSurface(placar);
 	SDL_FreeSurface(sair);
+	
 				
 	while(SDL_WaitEvent(&evento)){
 	/** Loop que espera o input do mouse de um usuário.*/
+
        	switch(evento.type){/** Switch para o input.*/
             case SDL_QUIT:/** Caso o jogador pressione o botão para fechar a janela.*/
 				SDL_DestroyTexture(textJogar);
@@ -64,13 +65,11 @@ void construtor(int x, int y,int estado){
 				z = evento.button.x;
 				w = evento.button.y;
 				if((z > 225) && (z < 417) && (w > 100) && (w < 190)){/** Condição quando o jogador clica em jogar.*/
-					SDL_DestroyTexture(textJogar);
-					SDL_DestroyTexture(textPlacar);
-					SDL_DestroyTexture(textSair);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 					SDL_RenderClear(renderer);
 					ponto = update(window,renderer);/** Começa o jogo e retorna a pontuação depois que o jogo for terminado.*/
-					InsereNome(ponto,window,renderer);
+					PegaNome(ponto,window,renderer);
+					
 				}
 				if((z > 225) && (z < 370) && (w > 325) && (w < 410)){/** Condição para quando o jogador clicar em sair.*/
 					SDL_DestroyTexture(textJogar);

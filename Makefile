@@ -1,21 +1,21 @@
 #Makefile#
 
-all: janela clean
-janela: janela.o main.o Falcon.o Hiero.o Obstaculo.o Inimigo.o Escrita.o
-	gcc -o janela main.o janela.o Falcon.o Hiero.o Obstaculo.o Inimigo.o Escrita.o -lSDL2_image -lSDL2_ttf -lSDL2
-Hiero.o: Hiero.c
-	gcc Hiero.c -o Hiero.o -c -I/usr/include/SDL2
-Falcon.o: Falcon.c
-	gcc Falcon.c -o Falcon.o -c -I/usr/include/SDL2
-Escrita.o: Escrita.c
-	gcc Escrita.c -o Escrita.o -c -I/usr/include/SDL2
-Obstaculo.o: Obstaculo.c
-	gcc Obstaculo.c -o Obstaculo.o -c -I/usr/include/SDL2
-Inimigo.o: Inimigo.c
-	gcc Inimigo.c -o Inimigo.o -c -I/usr/include/SDL2
-janela.o: janela.c
-	gcc janela.c -o janela.o -c -I/usr/include/SDL2
-main.o: main.c janela.h
-	gcc main.c -o main.o -c
+all: desert_falcon clean
+desert_falcon: desert_falcon.o main.o falcon.o hiero.o obstacle.o enemy.o score.o
+	gcc -o desert_falcon obj/main.o obj/desert_falcon.o obj/falcon.o obj/hiero.o obj/obstacle.o obj/enemy.o obj/score.o -lSDL2_image -lSDL2_ttf -lSDL2
+hiero.o: src/hiero.c
+	gcc src/hiero.c -o obj/hiero.o -c -I/usr/include/SDL2
+falcon.o: src/falcon.c
+	gcc src/falcon.c -o obj/falcon.o -c -I/usr/include/SDL2
+score.o: src/score.c
+	gcc src/score.c -o obj/score.o -c -I/usr/include/SDL2
+obstacle.o: src/obstacle.c
+	gcc src/obstacle.c -o obj/obstacle.o -c -I/usr/include/SDL2
+enemy.o: src/enemy.c
+	gcc src/enemy.c -o obj/enemy.o -c -I/usr/include/SDL2
+desert_falcon.o: src/desert_falcon.c
+	gcc src/desert_falcon.c -o obj/desert_falcon.o -c -I/usr/include/SDL2
+main.o: src/main.c lib/desert_falcon.h
+	gcc src/main.c -o obj/main.o -c
 clean:
 	rm -rf *.o
